@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="cone.css">
+<style>
+
+#viewPort{
+	position: absolute;
+	width: 603px;
+	height: 705px;
+	left: 20px;
+	top: 20px;
+	background-color: black;
+}
+
+.hiddenWords{
+	position:absolute;
+}
+
+</style>
+</head>
+
+<body>
+	<! external Scripts> 
+<script src='mouseInputs.js'></script>
+<script src='geoData.js'></script>
+
+<div id='viewPort'>
+	<div id="myCone" class="cone"></div>
+</div>
+
+<script>
+let viewPort = document.getElementById('viewPort');
+let cone = document.getElementById('myCone');
+
+let hidden_words = [ "Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua", "Ut", "enim", "ad", "minim", "veniam", "quis", "nostrud", "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo", "consequat", "Duis", "aute", "irure", "dolor", "in", "reprehenderit", "in", "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla", "pariatur", "Excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum" ];
+
+
+let putWordsIn = (target, words) => {
+	let targ_dims = getGeoData(target);
+	
+	words.map( word => {
+		let div = document.createElement('div');
+		div.innerText = word;
+		div.classList.add('hiddenWords');
+		target.appendChild(div);
+		
+		let wrd_dims = getGeoData(div);
+		
+		div.style.left = ( Math.random() * (targ_dims.width  - wrd_dims.width ) )+ 'px';
+		div.style.top = ( Math.random() * (targ_dims.height  - wrd_dims.height ) )+ 'px';
+	})
+}
+
+putWordsIn(viewPort, hidden_words);
+
+
+
+let viewPortData = ( mouseData ) => {
+	cone.style.transform = `rotate(${mouseData.centerAngle}deg)`;
+}
+
+addMouseMover( viewPort, viewPortData, 10 );
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* to rotate an elment, use javascript:
+
+element.style.transform = "rotate(20deg)";
+
+or; using angle = ___
+
+element.style.transform = `rotate(${angle}deg)`;
+
+*/
+
+.cone::before{
+	content: "";
+	background-color: green;
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	position:relative;
+	left: -10px;
+	top: -10px;
+	border-radius: 100%;
+}
+
+.cone{
+	position: relative;
+	content: '';
+	width: 0px;
+	height: 0px;
+		/* ^ The effect is a property of the borders not the actual element itself.
+		as such, the element should have no size of its own.
+		This also means that all calculations have to be manual*/
+	 
+	border-right: 300px solid rgba(255,255,0,0.75); 
+		/* ^ Determines how long our triangle will be extend*/
+  	border-top: 50px solid transparent;
+	border-bottom: 50px solid transparent;
+		/* ^ Each determines half the triangles height; 
+		need both and both should be the same  */
+	
+	border-radius:  0px 100px 100px 0px;
+			/* I can just round the borders. It shaves them down accordingly.
+			As such, may need to */
+	border-left: 1px solid red; /*gives us an axis line*/
+	left:50%;
+	top:50%;
+	/*background-color: white;*/
+	transform-origin: center left;
+	transform: rotate(45deg);
+}
